@@ -3,11 +3,13 @@ import TodoItem from './TodoItem'
 
 const App = () => {
   const [todos, setTodos] = useState([])
-
-  const addTodo = (title) => {
+  const [newTodo, setNewTodo] = useState('')
+  const addTodo = () => {
     // Generate a unique identifier for each todo item
     const id = new Date().getTime()
-    setTodos([...todos, { title, done: false, id }])
+    setTodos([...todos, { title: newTodo, done: false, id }])
+    // Clear the input field after adding a todo
+    setNewTodo('')
   }
 
   const toggleDone = (id) => {
@@ -34,10 +36,12 @@ const App = () => {
 
   return (
     <div>
-      <input type="text" />
-      <button onClick={() => addTodo(/* få titel från input-fältet */)}>
-        Add
-      </button>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+      />
+      <button onClick={addTodo}>Add</button>
       <button onClick={filterDone}>Filter Done</button>
       <button onClick={filterNotDone}>Filter Not Done</button>
 
