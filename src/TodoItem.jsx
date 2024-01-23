@@ -1,0 +1,16 @@
+// TodoItem.jsx
+import React from 'react'
+
+const TodoItem = ({ todo, toggleDone, deleteTodo }) => {
+  return (
+    <div>
+      <p style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+        {todo.title}
+      </p>
+      <button onClick={() => toggleDone(!todo.done)}>Toggle Done</button>
+      <button onClick={deleteTodo}>Delete</button>
+    </div>
+  )
+}
+
+export default TodoItem
