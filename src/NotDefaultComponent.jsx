@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import TodoItem from './TodoItem'
 
-export const NotDefaultComponent = ({ defaultState }) => {
-  const [todos, setTodos] = useState(defaultState || [])
+export const NotDefaultComponent = () => {
+  const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState('')
+  useEffect(() => {
+    // Load todos from localStorage when the component mounts
+    const storedTodos = localStorage.getItem('todos')
+    console.log(storedTodos)
+    if (storedTodos) {
+      // Update the state using setDefaultState
+      setTodos(JSON.parse(storedTodos))
+    }
+  }, [])
 
   useEffect(() => {
-    // Save todos to localStorage whenever the todos state changes
-    localStorage.setItem('todos', JSON.stringify(todos))
-    console.log(localStorage.getItem('todos'))
+    if (todos.length != 0) {
+      console.log('Array is empty!')
+      localStorage.setItem('todos', JSON.stringify(todos))
+    }
+    //  else {
+    //   const storedToDos = localStorage.setItem('todos', JSON.stringify(todos))
+    //   if (storedToDos) {
+    //     setTodos(JSON.parse(storedToDos))
+    //   }
+    // }
   }, [todos])
 
   const toggleDone = (id) => {
