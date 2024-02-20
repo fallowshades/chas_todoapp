@@ -12,7 +12,7 @@ export const NotDefaultComponent = () => {
       // Update the state using setDefaultState
       setTodos(JSON.parse(storedTodos))
     }
-  }, [])
+  }, [todos])
 
   useEffect(() => {
     if (todos.length != 0) {
@@ -25,7 +25,7 @@ export const NotDefaultComponent = () => {
     //     setTodos(JSON.parse(storedToDos))
     //   }
     // }
-  }, [todos])
+  }, [])
 
   const toggleDone = (id) => {
     setTodos((prevTodos) =>
